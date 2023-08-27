@@ -1,6 +1,6 @@
 import { ModelEntity } from "src/common/modelEntity";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { ITenant } from "../interfaces/tenants.interface";
+import { ITenant } from "../interfaces/tenant.interface";
 @Entity()
 export class Tenant extends ModelEntity implements ITenant{
 
