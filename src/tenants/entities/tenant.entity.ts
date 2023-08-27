@@ -1,11 +1,13 @@
+import { ModelEntity } from "src/common/modelEntity";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ITenant } from "../interfaces/tenants.interface";
 @Entity()
-export class Tenant {
+export class Tenant extends ModelEntity implements ITenant{
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ nullable: true })
     fullName: string;
 
     @Column()

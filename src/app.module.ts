@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TenantsModule } from './tenants/tenants.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { DatabaseModule } from './database.module';
+import { DatabaseModule } from './common/database.module';
 
 @Module({
   imports: [TenantsModule,ConfigModule,DatabaseModule],
