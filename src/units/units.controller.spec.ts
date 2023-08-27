@@ -1,28 +1,28 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TenantsController } from './tenants.controller';
-import { TenantsService } from './tenants.service';
+import { UnitsController } from './units.controller';
+import { UnitsService } from './units.service';
 import { Repository } from 'typeorm';
 
-describe('TenantsController', () => {
-  let controller: TenantsController;
+describe('UnitsController', () => {
+  let controller: UnitsController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [TenantsController],
+      controllers: [UnitsController],
       providers: [
-        TenantsService,
+        UnitsService,
         {
-          provide: 'TenantRepository',
+          provide: 'UnitRepository',
           useClass: Repository,
         },
         {
-          provide: 'UnitRepository',
+          provide: 'PropertyRepository',
           useClass: Repository,
         },
       ],
     }).compile();
 
-    controller = module.get<TenantsController>(TenantsController);
+    controller = module.get<UnitsController>(UnitsController);
   });
 
   it('should be defined', () => {

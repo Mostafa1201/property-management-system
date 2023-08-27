@@ -1,25 +1,22 @@
 import { ModelEntity } from "../../common/modelEntity";
 import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { ITenant } from "../interfaces/tenant.interface";
+import { IProperty } from "../interfaces/property.interface";
 import { BaseTimeEntity } from "../../common/dateEntity";
 import { Unit } from "../../units/entities/unit.entity";
+
 @Entity()
 @BaseTimeEntity()
-export class Tenant extends ModelEntity implements ITenant{
-
+export class Property extends ModelEntity implements IProperty{
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ nullable: true })
-    fullName: string;
+    @Column()
+    propertyName: string;
 
     @Column()
-    email: string;
+    location: string;
 
-    @Column()
-    phone: string;
-
-    @OneToMany(type => Unit, unit => unit.tenant , { eager: true })
+    @OneToMany(type => Unit, unit => unit.property , { eager: true })
     @JoinColumn()
     units: Unit[];
 }

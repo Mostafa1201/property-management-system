@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, UseFilters } from '@nestjs/common';
 import { TenantsService } from './tenants.service';
 import { CreateTenantDto } from './dto/create-tenant.dto';
-import { UpdateTenantDto } from './dto/update-tenant.dto';
+import { LeaseUnitDto } from './dto/lease-unit.dto';
+import { HttpExceptionFilter } from '../errors/http-exception.filter';
+import { UnleaseUnitDto } from './dto/unlease-unit.dto';
 
 @Controller('tenants')
 export class TenantsController {
@@ -17,18 +19,17 @@ export class TenantsController {
     return this.tenantsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tenantsService.findOne(+id);
+  @Put('lease')
+  @UseFilters(new HttpExceptionFilter())
+  leasePropertyUnit(
+    @Body() leaseUnitDto: LeaseUnitDto) {
+      return this.tenantsService.leaseUnit(leaseUnitDto);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTenantDto: UpdateTenantDto) {
-    return this.tenantsService.update(+id, updateTenantDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tenantsService.remove(+id);
+  @Put('unlease')
+  @UseFilters(new HttpExceptionFilter())
+  unleasePropertyUnit(
+    @Body() unleaseUnitDto: UnleaseUnitDto) {
+      return this.tenantsService.unleaseUnit(unleaseUnitDto);
   }
 }
