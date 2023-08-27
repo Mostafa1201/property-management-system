@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { LeaseUnitDto } from './dto/lease-unit.dto';
 import { Unit } from '../units/entities/unit.entity';
 import { UnleaseUnitDto } from './dto/unlease-unit.dto';
+import { HttpMessageConstants } from '../utils/Constants';
 
 @Injectable()
 export class TenantsService {
@@ -31,7 +32,7 @@ export class TenantsService {
       }
     });
     if(!tenant){
-      throw new NotFoundException('tenant not found');
+      throw new NotFoundException(HttpMessageConstants.TENANT_NOT_FOUND);
     }
     const unit = await this.unitRepository.findOne({
       where: {
@@ -39,10 +40,10 @@ export class TenantsService {
       }
     });
     if(!unit){
-      throw new NotFoundException('unit not found');
+      throw new NotFoundException(HttpMessageConstants.UNIT_NOT_FOUND);
     }
     if(unit.tenantId){
-      throw new ConflictException('Unit already leased by another tenant, unit must be unleased first');
+      throw new ConflictException(HttpMessageConstants.UNIT_ALREADY_LEASED);
     }
     let updatedUnit = {
       ...unit,
@@ -60,7 +61,7 @@ export class TenantsService {
       }
     });
     if(!unit){
-      throw new NotFoundException('unit not found');
+      throw new NotFoundException(HttpMessageConstants.UNIT_NOT_FOUND);
     }
     let updatedUnit = {
       ...unit,

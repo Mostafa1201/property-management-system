@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Unit } from './entities/unit.entity';
 import { Repository } from 'typeorm';
 import { Property } from '../properties/entities/property.entity';
+import { HttpMessageConstants } from '../utils/Constants';
 
 @Injectable()
 export class UnitsService {
@@ -21,7 +22,7 @@ export class UnitsService {
       }
     });
     if(!property){
-      throw new NotFoundException('unit must belong to a property, propertyId provided is not found');
+      throw new NotFoundException(HttpMessageConstants.PROPERTY_NOT_FOUND);
     }
     const newUnit = this.unitRepository.create(createUnitDto);
     await this.unitRepository.save(newUnit);
