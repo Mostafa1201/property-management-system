@@ -1,6 +1,6 @@
 # Aamar property management system (Assumptions)
 
-* I assumed that the property will be created in the dashboard (frontend) first, and then multiple units are added to it later.
+* I assumed that there will be 2 steps for the process => the property will be created first, and then multiple units are added to it later.
 * Since property can have multiple units, I added the "price per square meter" and "number of rooms" and status in the unit table.
 * Property only has the property name and the location. 
 
@@ -10,9 +10,13 @@
 # Development
 # Installation
 
-## Linux
-
 ```bash
 npm install
 npm run start:dev
+```
+
+# Testing
+
+```bash
+npm run test
 ```
