@@ -71,4 +71,22 @@ describe('TenantsService', () => {
     let unitUpdated = await tenantService.leaseUnit({ tenantId: tenant.id, unitId: unit.id });
     expect(unitUpdated.tenant.id).toEqual(tenant.id);
   });
+
+  it('should unlease property unit from a tenant', async () => {
+    const propertyRequestData = { propertyName: "Aaamar property 1", location: "33.232.1232" };
+    propertyRepositoryMock.create.mockReturnValue(propertyRequestData);
+    let property = await propertyService.create(propertyRequestData) as Property;
+    property.id = 1;
+
+    const tenantRequestData = { id: 1,fullName: "Mostafa", email: "mostafa@gmail.com", phone: "01023012" };
+    tenantRepositoryMock.create.mockReturnValue(tenantRequestData);
+    let tenant = await tenantService.create(tenantRequestData) as Tenant;
+
+    const unitRequestData = { tenantId: tenant.id, propertyId: property.id ,numOfRooms: 2, pricePerSquareMeter: 3.5, status: UnitStatus.vacant };
+    unitRepositoryMock.create.mockReturnValue(unitRequestData);
+    let unit = await unitsService.create(unitRequestData);
+    unit.id = 1;
+    let unitUpdated = await tenantService.unleaseUnit({ unitId: unit.id });
+    expect(unitUpdated.tenantId).toEqual(null);
+  });
 });
