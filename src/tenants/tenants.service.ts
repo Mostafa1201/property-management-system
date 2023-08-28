@@ -68,7 +68,8 @@ export class TenantsService {
     }
     let updatedUnit = {
       ...unit,
-      tenant: null
+      tenant: null,
+      tenantId: null
     };
     this.unitRepository.save(updatedUnit)
     return updatedUnit;

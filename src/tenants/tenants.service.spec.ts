@@ -86,6 +86,7 @@ describe('TenantsService', () => {
     unitRepositoryMock.create.mockReturnValue(unitRequestData);
     let unit = await unitsService.create(unitRequestData);
     unit.id = 1;
+    unitRepositoryMock.findOne = jest.fn(() => unit)
     let unitUpdated = await tenantService.unleaseUnit({ unitId: unit.id });
     expect(unitUpdated.tenantId).toEqual(null);
   });
