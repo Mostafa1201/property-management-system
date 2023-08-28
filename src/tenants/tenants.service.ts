@@ -63,6 +63,9 @@ export class TenantsService {
     if(!unit){
       throw new NotFoundException(HttpMessageConstants.UNIT_NOT_FOUND);
     }
+    if(!unit.tenantId){
+      throw new ConflictException(HttpMessageConstants.UNIT_ALREADY_UNLEASED);
+    }
     let updatedUnit = {
       ...unit,
       tenant: null
