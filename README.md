@@ -32,4 +32,4 @@ npm run test
 npm run start
 ```
 
-* Docs should be under this route: [a link](http://localhost:3000/docs)
+* Docs should be under this route: http://localhost:3000/docs
