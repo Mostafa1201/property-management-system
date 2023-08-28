@@ -20,3 +20,16 @@ npm run start:dev
 ```bash
 npm run test
 ```
+
+# Docs
+
+* swagger is used for api documentation
+* Following steps is recommended:
+  * Delete dist folder
+  * start the server
+
+```bash
+npm run start
+```
+
+* Docs should be under this route: [a link](http://localhost:3000/docs)
